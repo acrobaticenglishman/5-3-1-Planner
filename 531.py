@@ -6,7 +6,7 @@ import sys
 # 5/3/1 is a workout program where your loads are based on a percentage of your one rep max for four exercises: the squat, deadlift, bench press and overhead press.
 # This program will ask a user for their best rep max, be it one rep or more, and will calculate the loads for their workouts, and create a spreadsheet containing their workout.
 # There are two other functions. One allows the user to specify the plates they have available to them. The second will tell the user what plates they need on either side of the bar
-# in order to load the correct amount of weight. 
+# in order to load the correct amount of weight.
 
 # The exercise class. Takes the following paramaters:(name of the exercise, max reps, max weight, unit).
 # Unit is optional, will default to KG if nothing is specified.
