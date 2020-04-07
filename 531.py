@@ -115,7 +115,7 @@ def create_exercise_objects_with_input():
     return squat, deadlift, bench, ohp
 
 # Redundant
-# Function to create 5/3/1 workout if exercise objects already exist.
+    # Function to create 5/3/1 workout if exercise objects already exist.
 def create_531_with_objects(squat, deadlift, bench, ohp):
     # Creates a dataframe containing the workout for each exercise.
     squat_workout = squat.create_workout()
@@ -233,9 +233,6 @@ def create_workout_spreadsheet(squat_workout, deadlift_workout, bench_workout, o
         output = 'Ok! No sweat!'
         print (output + '\n' + '-' * len(output))
 
-
-
-
 # Order to run the program:
 
 # First, create the exercise objects.
@@ -249,8 +246,9 @@ create_workout_spreadsheet(squat_workout, deadlift_workout, bench_workout, ohp_w
     # Have the user specify the plates available to them.
 weight_plate_list = define_weight_plate_list()
     # User can specify a weight and be told the weight needed on either side.
+    # Not implemented entirely yet.
 
 # Empty Variable for weight_plate function
-plates_final_list = []
-output = 'You will need the following plates on each side: '
-plates_final_list = (weight_plate(weight_plate_list, 100, 0, plates_final_list, bar=20))
+# plates_final_list = []
+# output = 'You will need the following plates on each side: '
+# plates_final_list = (weight_plate(weight_plate_list, 100, 0, plates_final_list, bar=20))
