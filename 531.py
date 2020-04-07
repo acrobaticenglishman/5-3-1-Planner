@@ -195,7 +195,8 @@ def weight_plate(weight_plate_list_this, weight_target_this, weight_plate_index_
         print ('You will need {X} {PLATE}{UNIT}'.format(
             X=plate_needed_this,
             PLATE = weight_plate_list_this[weight_plate_index_this],
-            UNIT = units) + output_line_ending )
+            UNIT = units)
+            + output_line_ending)
 
     # Sets a condition to continue the recursion.
     ok_to_continue = True
