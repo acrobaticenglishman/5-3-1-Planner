@@ -76,9 +76,8 @@ def create_exercise_objects_with_input():
         # Creating an exercise-object.
         try:
             # Takes an input from the user in the format reps x weight. Splits the input into 2 variables on the 'x'.
-            reps, weight = input(
-                "Enter your best reps & weight for the {EXERCISE_NAME}: \n".format(
-                    EXERCISE_NAME=exercise_name)).split('x')
+            print (f'Enter your best reps & weight for the {exercise_name}')
+            reps, weight = input().split('x')
 
             # Cast the inputted information to the needed types.
             exercise_name = str(exercise_name)
@@ -94,6 +93,7 @@ def create_exercise_objects_with_input():
         except ValueError:
             print("Sorry, that is not a valid rep & weight scheme. Please try again.")
             create_exercise_object(str(exercise_name))
+
     # List of exercises in the program.
     list_of_exercises = ['Squat', 'Deadlift', 'Bench', 'Overhead Press']
 
@@ -169,7 +169,7 @@ def define_weight_plate_list():
 # Recursive function to calculate which plates you need to add to one side of the bar based on a given weight.
 def weight_plate(weight_plate_list_this, weight_target_this, weight_plate_index_this, plates_final_list_this, units='kg', bar = 0):
 
-    # Subtracts the weight of the bar from the calculation. By default the bar weight is zero. It has to be specified by the user.
+    # Subtracts the weight of half the bar from the calculation. By default the bar weight is zero. It has to be specified by the user.
     weight_target_this = weight_target_this - (bar / 2)
 
     # Translates the final string output to be in 'lbs' instead of kg. If anything other than 'lbs' or 'kg' is entered, will default to kg.
@@ -192,7 +192,10 @@ def weight_plate(weight_plate_list_this, weight_target_this, weight_plate_index_
     if plate_needed_this == 1:
         output_line_ending = ' plate on each side'
     if plate_needed_this >= 1:
-        print ('You will need {X} {PLATE}{UNIT}'.format(X=plate_needed_this, PLATE = weight_plate_list_this[weight_plate_index_this], UNIT = units) + output_line_ending )
+        print ('You will need {X} {PLATE}{UNIT}'.format(
+            X=plate_needed_this,
+            PLATE = weight_plate_list_this[weight_plate_index_this],
+            UNIT = units) + output_line_ending )
 
     # Sets a condition to continue the recursion.
     ok_to_continue = True
