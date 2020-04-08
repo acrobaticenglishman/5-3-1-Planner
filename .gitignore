@@ -1,2 +1,5 @@
 
 *.xml
+.DS_Store
+__pycache__/five_three_one_planner.cpython-37.pyc
+__pycache__/fivethreeone.cpython-37.pyc
