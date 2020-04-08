@@ -237,22 +237,26 @@ def create_workout_spreadsheet(squat_workout, deadlift_workout, bench_workout, o
         output = 'Ok! No sweat!'
         print (output + '\n' + '-' * len(output))
 
-# Order to run the program:
-
-# First, create the exercise objects.
-squat, deadlift, bench, ohp = create_exercise_objects_with_input()
-# Second, create the workouts for each exercise object.
-squat_workout, deadlift_workout, bench_workout, ohp_workout = squat.create_workout(), deadlift.create_workout(), bench.create_workout(), ohp.create_workout()
-# Third, creates the spreadsheet containing the workouts.
-create_workout_spreadsheet(squat_workout, deadlift_workout, bench_workout, ohp_workout)
-# Lastly, ask the user if they want to move forward with the optional steps.
-# Optional steps:
-    # Have the user specify the plates available to them.
-weight_plate_list = define_weight_plate_list()
-    # User can specify a weight and be told the weight needed on either side.
-    # Not implemented entirely yet.
-
-# Empty Variable for weight_plate function
-# plates_final_list = []
-# output = 'You will need the following plates on each side: '
-# plates_final_list = (weight_plate(weight_plate_list, 100, 0, plates_final_list, bar=20))
+# Calculates the one rep max and the training max.
+def one_rep_max_calc(reps, weight):
+    one_rep_max = math.floor(weight * (1 + (reps / 30)))
+    training_max = math.floor(one_rep_max * .90)
+# Order to ru
+#
+# # First, create the exercise objects.
+# squat, deadlift, bench, ohp = create_exercise_objects_with_input()
+# # Second, create the workouts for each exercise object.
+# squat_workout, deadlift_workout, bench_workout, ohp_workout = squat.create_workout(), deadlift.create_workout(), bench.create_workout(), ohp.create_workout()
+# # Third, creates the spreadsheet containing the workouts.
+# create_workout_spreadsheet(squat_workout, deadlift_workout, bench_workout, ohp_workout)
+# # Lastly, ask the user if they want to move forward with the optional steps.
+# # Optional steps:
+#     # Have the user specify the plates available to them.
+# weight_plate_list = define_weight_plate_list()
+#     # User can specify a weight and be told the weight needed on either side.
+#     # Not implemented entirely yet.
+#
+# # Empty Variable for weight_plate function
+# # plates_final_list = []
+# # output = 'You will need the following plates on each side: '
+# # plates_final_list = (weight_plate(weight_plate_list, 100, 0, plates_final_list, bar=20))n the program:
