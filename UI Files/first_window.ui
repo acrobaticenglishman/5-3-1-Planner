@@ -163,6 +163,12 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="buttonSymbols">
+     <enum>QAbstractSpinBox::NoButtons</enum>
+    </property>
+    <property name="specialValueText">
+     <string>Butts</string>
+    </property>
    </widget>
    <widget class="QLabel" name="squat_img">
     <property name="geometry">

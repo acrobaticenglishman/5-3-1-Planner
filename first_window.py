@@ -1,15 +1,11 @@
-# -*- coding: utf-8 -*-
+# File for the GUI. Built with PyQt5 and QDesigner
 
-# Form implementation generated from reading ui file '/Users/nathanprice/Documents/GitHub/5-3-1-Planner/first_window.ui'
-#
-# Created by: PyQt5 UI code generator 5.14.2
-#
-# WARNING! All changes made in this file will be lost!
-
-
+from five_three_one_tools import call_weight_plate
+# Import the needed modules and functions.
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import Qt
-import math
+from PyQt5.QtCore import (Qt)
+from PyQt5.QtWidgets import QDesktopWidget
+from five_three_one_planner import exercise, create_workout_spreadsheet
 
 class Ui_First_Window(object):
     # SetUp UI Function
@@ -19,7 +15,14 @@ class Ui_First_Window(object):
         First_Window.resize(855, 604)
         self.centralwidget = QtWidgets.QWidget(First_Window)
         self.centralwidget.setObjectName("centralwidget")
-        # SQUAT INFORMATION
+
+        # Opens the window to the center of the screen
+        qtRectangle = First_Window.frameGeometry()
+        centerPoint = QDesktopWidget().availableGeometry().center()
+        qtRectangle.moveCenter(centerPoint)
+        First_Window.move(qtRectangle.topLeft())
+
+        # SQUAT LAYOUT INFORMATION
         # Squat Reps Box
         self.squat_reps_box = QtWidgets.QSpinBox(self.centralwidget)
         self.squat_reps_box.setGeometry(QtCore.QRect(60, 220, 51, 31))
@@ -62,7 +65,7 @@ class Ui_First_Window(object):
         self.squat_img.setScaledContents(True)
         self.squat_img.setObjectName("squat_img")
 
-        # DEADLIFT INFORMATION
+        # DEADLIFT LAYOUT INFORMATION
         # Deadlift Reps Box
         self.deadlift_reps_box = QtWidgets.QSpinBox(self.centralwidget)
         self.deadlift_reps_box.setGeometry(QtCore.QRect(270, 220, 51, 31))
@@ -104,7 +107,7 @@ class Ui_First_Window(object):
         self.deadlift_img.setScaledContents(True)
         self.deadlift_img.setObjectName("deadlift_img")
 
-        # BENCH PRESS INFORMATION
+        # BENCH PRESS LAYOUT INFORMATION
         # Bench Reps Box
         self.bench_reps_box = QtWidgets.QSpinBox(self.centralwidget)
         self.bench_reps_box.setGeometry(QtCore.QRect(470, 220, 51, 31))
@@ -147,7 +150,7 @@ class Ui_First_Window(object):
         self.bench_img.setScaledContents(True)
         self.bench_img.setObjectName("bench_img")
 
-        # OVERHEAD PRESS INFORMATION
+        # OVERHEAD PRESS LAYOUT INFORMATION
         # Overhead Press Reps Box
         self.ohp_reps_box = QtWidgets.QSpinBox(self.centralwidget)
         self.ohp_reps_box.setGeometry(QtCore.QRect(670, 220, 51, 31))
@@ -192,7 +195,7 @@ class Ui_First_Window(object):
 
         # One Rep Calc Button
         self.one_rep_calc_button = QtWidgets.QPushButton(self.centralwidget)
-        self.one_rep_calc_button.setGeometry(QtCore.QRect(280, 370, 281, 101))
+        self.one_rep_calc_button.setGeometry(QtCore.QRect(280, 450, 281, 101))
         font = QtGui.QFont()
         font.setPointSize(24)
         self.one_rep_calc_button.setFont(font)
@@ -201,59 +204,92 @@ class Ui_First_Window(object):
 
         # First Window - Main
         First_Window.setCentralWidget(self.centralwidget)
-        # First Window - Menu Bar
-        self.menubar = QtWidgets.QMenuBar(First_Window)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 855, 22))
-        self.menubar.setObjectName("menubar")
 
         self.retranslateUi(First_Window)
         QtCore.QMetaObject.connectSlotsByName(First_Window)
 
+    # Literally no idea what this does. Qt Designer created it for me, scared to fiddle with or remove it.
     def retranslateUi(self, First_Window):
         _translate = QtCore.QCoreApplication.translate
         First_Window.setWindowTitle(_translate("First_Window", "One Rep Max Calculator"))
-        self.one_rep_calc_button.setText(_translate("First_Window", "Calculate One Rep Max"))
+        self.one_rep_calc_button.setText(_translate("First_Window", "Create Your 5/3/1 Workout"))
+        self.one_rep_calc_button.adjustSize()
+        self.one_rep_calc_button.repaint()
 
+    # The function updates and shows hidden QLabels with the one_rep and training_max values for each exercise.
     def click_one_rep_calc_button(self):
+
         # Squat
-        squat_reps = int(self.squat_reps_box.cleanText())
-        squat_weight = int (self.squat_weight_box.cleanText())
-        squat_one_rep_max = math.floor(squat_weight * (1 + (squat_reps / 30)))
-        squat_training_max = math.floor(squat_one_rep_max * .90)
-        squat_output = f'One Rep Max: {squat_one_rep_max}\nTraining Max: {squat_training_max}'
+
+        # Creates an exercise object using the informaiton in the reps & weight box.
+        squat = exercise('Squat', reps=int(self.squat_reps_box.cleanText()), weight=int (self.squat_weight_box.cleanText()))
+        squat_workout, squat_workout_dataframe = squat.create_workout(output='both')
+        # String output to be used to update the hidden labels.
+        squat_output = f'One Rep Max: {squat.one_rep}\nTraining Max: {squat.training_max}'
+        # Sets the text for and displays the hidden labels.
         self.squat_label.setText(squat_output)
         self.squat_label.adjustSize()
         self.squat_label.repaint()
 
         # Deadlift
-        deadlift_reps = int(self.deadlift_reps_box.cleanText())
-        deadlift_weight = int(self.deadlift_weight_box.cleanText())
-        deadlift_one_rep_max = math.floor(deadlift_weight * (1 + (deadlift_reps / 30)))
-        deadlift_training_max = math.floor(deadlift_one_rep_max * .90)
-        deadlift_output = f'One Rep Max: {deadlift_one_rep_max}\nTraining Max: {deadlift_training_max}'
+
+        # Creates an exercise object using the informaiton in the reps & weight box.
+        deadlift = exercise('Deadlift', reps=int(self.deadlift_reps_box.cleanText()),weight=int(self.deadlift_weight_box.cleanText()))
+        deadlift_workout, deadlift_workout_dataframe = deadlift.create_workout(output='both')
+        # String output to be used to update the hidden labels.
+        deadlift_output = f'One Rep Max: {deadlift.one_rep}\nTraining Max: {deadlift.training_max}'
+        # Sets the text for and displays the hidden labels.
         self.deadlift_label.setText(deadlift_output)
         self.deadlift_label.adjustSize()
         self.deadlift_label.repaint()
 
         # Bench Press
-        bench_reps = int (self.bench_reps_box.cleanText())
-        bench_weight = int (self.bench_weight_box.cleanText())
-        bench_one_rep_max = math.floor(bench_weight * (1 + (bench_reps / 30)))
-        bench_training_max = math.floor(bench_one_rep_max * .90)
-        bench_output = f'One Rep Max: {bench_one_rep_max}\nTraining Max: {bench_training_max}'
+
+        # Creates an exercise object using the informaiton in the reps & weight box.
+        bench = exercise('Bench Press', reps=int (self.bench_reps_box.cleanText()), weight=int (self.bench_weight_box.cleanText()))
+        bench_workout, bench_workout_dataframe = bench.create_workout(output='both')
+        # String output to be used to update the hidden labels.
+        bench_output = f'One Rep Max: {bench.one_rep}\nTraining Max: {bench.training_max}'
+        # Sets the text for and displays the hidden labels.
         self.bench_label.setText(bench_output)
         self.bench_label.adjustSize()
         self.bench_label.repaint()
 
         # Overhead Press
-        ohp_reps = int (self.ohp_reps_box.cleanText())
-        ohp_weight = int (self.ohp_weight_box.cleanText())
-        ohp_one_rep_max = math.floor(ohp_weight * (1 + (ohp_reps / 30)))
-        ohp_training_max = math.floor(ohp_one_rep_max * .90)
-        ohp_output = f'One Rep Max: {ohp_one_rep_max}\nTraining Max: {ohp_training_max}'
+
+        # Creates an exercise object using the informaiton in the reps & weight box.
+        ohp = exercise('Overhead Press', reps=int (self.ohp_reps_box.cleanText()), weight=int (self.ohp_weight_box.cleanText()))
+        ohp_workout, ohp_workout_dataframe = ohp.create_workout(output='both')
+        # String output to be used to update the hidden labels.
+        ohp_output = f'One Rep Max: {ohp.one_rep}\nTraining Max: {ohp.training_max}'
+        # Sets the text for and displays the hidden labels.
         self.ohp_label.setText(ohp_output)
         self.ohp_label.adjustSize()
         self.ohp_label.repaint()
+
+        # Uses the create_workout_spreadsheet function from the five_three_one_planner.py file to create and save workouts for each exercise.
+        create_workout_spreadsheet([squat, deadlift, bench, ohp])
+
+        # Displays a pop up window.
+        self.show_popup()
+
+
+    def show_popup(self):
+        msg = QtWidgets.QMessageBox()
+        msg.setGeometry(1150, 730, 100, 100)
+        msg.setWindowTitle('Thanks!')
+        msg.setText('Your workout has been saved.')
+        msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+        msg.buttonClicked.connect(self.ok_button_pressed)
+        x = msg.exec_()
+
+    def ok_button_pressed(self):
+        QtWidgets.QMainWindow().close()
+        QtWidgets.QMessageBox().close()
+        call_weight_plate()
+
+
+
 
 if __name__ == "__main__":
     import sys
