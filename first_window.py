@@ -283,11 +283,6 @@ class Ui_First_Window(object):
         msg.buttonClicked.connect(self.ok_button_pressed)
         x = msg.exec_()
 
-    def ok_button_pressed(self):
-        QtWidgets.QMainWindow().close()
-        QtWidgets.QMessageBox().close()
-        call_weight_plate()
-
 
 
 

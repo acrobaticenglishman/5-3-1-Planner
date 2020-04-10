@@ -40,7 +40,7 @@ class exercise:
         i = -3
         reps_i_this = -3
 
-        # Loops through the key valyes for the highest level dictionary.
+        # Loops through the key values for the highest level dictionary.
         for week in self.workout_dict.keys():
             # modifies the index values to be inputted into the recursive change_val function.
             i+= 3
