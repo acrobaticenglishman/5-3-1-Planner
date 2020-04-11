@@ -52,7 +52,7 @@ def weight_plate(weight_plate_list_this, weight_target_this, weight_plate_index_
 
 # Takes an input from the user to generate a list of weights they have available to them.
 def define_weight_plate_list():
-    print ("Please enter the weights you have available to you in this format: 25, 20, 10. \nSeperate each weight with a ,")
+    print ("Please enter the weights you have available to you in this format: 25, 20, 10 \nSeperate each weight with a ,")
     # Seperates the users input on the comma to create a list of weights.
     # Casts the individual elements of the list to an integer value.
     try:
@@ -80,14 +80,8 @@ def define_weight_plate_list():
 
     return list_of_weights
 
-# Function to be passed to the main script to ask user if they would like to call the weight_plate function.
+# Function to be passed to the main script to iniate the weight plate calculator, and to have the user input the relevant arguments.
 def call_weight_plate():
-    message = "\nWe also have a handy tool to help you figure out how many plates you need to add to either side of the bar.\n"
-    lines = len(message) * ('*')
-    print(lines + message + lines)
-    print ("Wanna use it?")
-    answer = input('Enter Y or N ')
-    if answer.lower() == 'y':
         message = '\nOk! Couple questions!\n'
         lines = len(message) * ('-')
         print(lines + message + lines)
@@ -112,7 +106,3 @@ def call_weight_plate():
         final_weight_plate_list = [str (weight) + str(unit_of_choice) for weight in final_weight_plate_list ]
         output = 'You will need the following plates on each side of the bar:'
         print (output, final_weight_plate_list)
-    else:
-        message = 'Fine. Whatever. Not like I worked hard on it or anything'
-        lines = len(message) * ('-')
-        print(lines + message + lines)

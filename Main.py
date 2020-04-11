@@ -6,9 +6,9 @@ import sys
 
 welcome_message = '\nWelcome to the 5/3/1 Workout Creation Program!\n'
 print('*' * len(welcome_message) + welcome_message + '*' * len(welcome_message))
-print("Please choose how you would like to create your workout:\n1. With a GUI\n2. With text input\n3. Just use our handy plate calculator tool")
 
 def five_three_one_creator():
+    print("Please choose how you would like to create your workout:\n1. With a GUI\n2. With text input\n3. Just use our handy plate calculator tool")
     answer = input('Please enter 1, 2 or 3:\n')
     # Starts creation via GUI
     if answer == '1':
@@ -41,7 +41,7 @@ def five_three_one_creator():
         print('-' * len(output) + output + '-' * len(output))
 
     print ('Need anything else?')
-    answer = input('Enter Y or N: ')
+    answer = input('Enter Y or N: \n')
     if answer.lower() == 'y':
         five_three_one_creator()
     else:

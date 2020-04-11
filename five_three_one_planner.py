@@ -138,3 +138,10 @@ def create_workout_spreadsheet(list_of_exercises):
         print (output)
         print ('-' * len(output))
 
+squat = exercise('squat', 1, 100)
+
+squat_df = squat.create_workout(output='dataframe')
+
+squat_dict = squat_df.to_dict()
+
+print (squat_dict)
